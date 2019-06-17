@@ -1,4 +1,4 @@
-<h4>You finished a round of 3-Card Poker</h4>
+<h4>You finished a round of Kuhn Poker</h4>
 
 #< if (.player == 1)
 #. include end-page-pl1.Rmd

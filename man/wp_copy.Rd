@@ -9,3 +9,9 @@ wp_copy(wp)
 \description{
 Copy a web play object
 }
+\seealso{
+Other Web Play: \code{\link{get_wp}}, \code{\link{new_wp}},
+  \code{\link{set_wp_for_app}}, \code{\link{wpDevelApp}},
+  \code{\link{wp_developer_ui}}, \code{\link{wp_reset}},
+  \code{\link{wp_set_to_play}}
+}

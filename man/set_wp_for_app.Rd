@@ -18,6 +18,7 @@ The function get_wp() returns the web play object of the current app instance.
 }
 \seealso{
 Other Web Play: \code{\link{get_wp}}, \code{\link{new_wp}},
-  \code{\link{wpDevelApp}}, \code{\link{wp_developer_ui}},
-  \code{\link{wp_reset}}, \code{\link{wp_set_to_play}}
+  \code{\link{wpDevelApp}}, \code{\link{wp_copy}},
+  \code{\link{wp_developer_ui}}, \code{\link{wp_reset}},
+  \code{\link{wp_set_to_play}}
 }

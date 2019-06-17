@@ -1,0 +1,38 @@
+<br>
+<p>The famous mathematician <a href="https://en.wikipedia.org/wiki/Harold_W._Kuhn">Harold W. Kuhn</a> (1951) developed a <a href="https://en.wikipedia.org/wiki/Kuhn_poker">simple poker game</a> that is tractable for game theoretic analysis. A <a href="https://skranz.github.io/gtree/articles/t03_kuhn_poker.html">gtree Tutorial</a> shows how you can solve for its equilibria.</p>
+
+<p>This app allows you to play the game. You play against the pool of earlier users where the exact previous user you face is drawn randomly. The first users of the app play against a robot that follows Nash equilibria.</p>
+
+<p>You can take a look at the rules below or just start playing.</p>
+
+<p>Rules of the 3-Card Poker:</p>
+
+<ul>
+<li><p>Each player puts 1 dollar as ante into the pot.</p></li>
+<li><p>There are three cards in this order: Jack, Queen and Ace. Each player is dealt one of the three cards and sees it secretly.</p></li>
+
+<li>Player 1 can either check or bet one extra dollar.
+<ul>
+<li>If <strong>player 1 checks</strong> then also player 2 can either check or bet one extra dollar.
+<ul>
+<li>If <strong>player 2 also checks</strong>, both cards are shown and the higher card wins <strong>one dollar</strong>.</li>
+<li>If <strong>player 2 bets</strong> then player 1 can fold or call.
+<ul>
+<li>If <strong>player 1 folds</strong> then player 2 wins <strong>one dollar</strong>.</li>
+<li>If <strong>player 1 calls</strong> both cards are shown and the higher card wins <strong>two dollars</strong>.</li>
+</ul></li>
+</ul></li>
+<li>If initially <strong>player 1 bets</strong> then player 2 can fold or call.
+<ul>
+<li>If <strong>player 2 folds</strong> then player 1 wins <strong>one dollar</strong>.</li>
+<li>If <strong>player 2 calls</strong>, cards are shown and the higher card wins <strong>two dollars</strong>.</li>
+</ul></li>
+</ul></li>
+</ul>
+
+
+<b>References</b>
+
+<p>
+H. W. Kuhn (1951). 9. A SIMPLIFIED TWO-PERSON POKER. In Harold William Kuhn, Albert William Tucker (Eds.), Contributions to the Theory of Games (AM-24), Volume I (pp. 97–104). Princeton: Princeton
+</p>

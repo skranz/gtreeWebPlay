@@ -7,7 +7,7 @@
 new_wp(game, bots, human = 1, wpUI = "wpUI", verbose = FALSE,
   pages.dir = file.path(getwd(), "pages"), custom = list(),
   pre.page.handler = NULL, post.page.handler = NULL,
-  finish.handler = wp.default.finish.handler)
+  finish.handler = wp.default.finish.handler, ...)
 }
 \arguments{
 \item{game}{A gtree game generated with \code{\link[gtree]{new_game}}.}
@@ -20,12 +20,12 @@ new_wp(game, bots, human = 1, wpUI = "wpUI", verbose = FALSE,
 Create a new web play object
 }
 \seealso{
-Other Bots: \code{\link{bot_eq}}, \code{\link{bot_random}},
-  \code{\link{bot_tables}}, \code{\link{make_bots}},
-  \code{\link{play_bot_vs_bot}}
+Other Bots: \code{\link{bot_eq}}, \code{\link{bot_pop}},
+  \code{\link{bot_random}}, \code{\link{bot_tables}},
+  \code{\link{make_bots}}, \code{\link{play_bot_vs_bot}}
 
 Other Web Play: \code{\link{get_wp}},
   \code{\link{set_wp_for_app}}, \code{\link{wpDevelApp}},
-  \code{\link{wp_developer_ui}}, \code{\link{wp_reset}},
-  \code{\link{wp_set_to_play}}
+  \code{\link{wp_copy}}, \code{\link{wp_developer_ui}},
+  \code{\link{wp_reset}}, \code{\link{wp_set_to_play}}
 }

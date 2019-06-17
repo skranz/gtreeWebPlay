@@ -14,6 +14,6 @@ set_wp_for_app
 
 Other Web Play: \code{\link{new_wp}},
   \code{\link{set_wp_for_app}}, \code{\link{wpDevelApp}},
-  \code{\link{wp_developer_ui}}, \code{\link{wp_reset}},
-  \code{\link{wp_set_to_play}}
+  \code{\link{wp_copy}}, \code{\link{wp_developer_ui}},
+  \code{\link{wp_reset}}, \code{\link{wp_set_to_play}}
 }

@@ -1,4 +1,4 @@
-<h4>A new round of 3-Card Poker</h4>
+<h4>A new round of Kuhn Poker</h4>
 <p>
 You are player 1 and have drawn {{card_lab[1]}}.
 </p>

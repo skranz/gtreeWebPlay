@@ -17,7 +17,7 @@ play_bot_vs_bot(game, bots, return.play.object = FALSE)
 Simulate one play of the game
 }
 \seealso{
-Other Bots: \code{\link{bot_eq}}, \code{\link{bot_random}},
-  \code{\link{bot_tables}}, \code{\link{make_bots}},
-  \code{\link{new_wp}}
+Other Bots: \code{\link{bot_eq}}, \code{\link{bot_pop}},
+  \code{\link{bot_random}}, \code{\link{bot_tables}},
+  \code{\link{make_bots}}, \code{\link{new_wp}}
 }

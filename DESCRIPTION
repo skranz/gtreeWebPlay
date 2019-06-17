@@ -1,12 +1,12 @@
 Package: gtreeWebPlay
 Type: Package
-Title: Play gtree games in the web  
+Title: Create shiny apps to play gtree games 
 Version: 0.0.1
 Date: 2019-06-14
 Author: Sebastian Kranz
 Maintainer: Sebastian Kranz <sebastian.kranz@uni-ulm.de>
 Description:
-  Create Shiny web apps that allow single users to play game-theoretic gtree games
+  Create shiny web apps that allow single users to play game-theoretic gtree games
   against the computer who can e.g. follow equilibrium strategies, or average behavior
   of the population of all players so far.
 License: GPL >= 2.0

@@ -17,7 +17,7 @@ make_bots(game, bot_fun, ..., players = game$players)
 Every player gets the same bot type
 }
 \seealso{
-Other Bots: \code{\link{bot_eq}}, \code{\link{bot_random}},
-  \code{\link{bot_tables}}, \code{\link{new_wp}},
-  \code{\link{play_bot_vs_bot}}
+Other Bots: \code{\link{bot_eq}}, \code{\link{bot_pop}},
+  \code{\link{bot_random}}, \code{\link{bot_tables}},
+  \code{\link{new_wp}}, \code{\link{play_bot_vs_bot}}
 }

@@ -15,7 +15,7 @@ bot_random(game, player, ...)
 Always picks each possible move with equal probability
 }
 \seealso{
-Other Bots: \code{\link{bot_eq}}, \code{\link{bot_tables}},
-  \code{\link{make_bots}}, \code{\link{new_wp}},
-  \code{\link{play_bot_vs_bot}}
+Other Bots: \code{\link{bot_eq}}, \code{\link{bot_pop}},
+  \code{\link{bot_tables}}, \code{\link{make_bots}},
+  \code{\link{new_wp}}, \code{\link{play_bot_vs_bot}}
 }

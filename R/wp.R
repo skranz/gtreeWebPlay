@@ -58,8 +58,7 @@ wp.page.file = function(wp=get_wp(), copy.auto=FALSE, make.auto=TRUE) {
 #' @param game A gtree game generated with \code{\link[gtree]{new_game}}.
 #' @param bots A list with one bots for every player. Also add a bot for the human player. You can call \code{\link{make_bots}} to conveniently create the bots.
 #' @param human index of the player that is played by a human in the web app.
-#' @param mainUI
-#' @family Bots
+#' @param wpUI the id of the \code{uiOutput} element in the app ui where the web play will be shown.
 #' @family Web Play
 new_wp = function(game,bots,human=1, wpUI="wpUI", verbose=FALSE, pages.dir = file.path(getwd(),"pages"),custom=list(), pre.page.handler = NULL,post.page.handler = NULL, finish.handler = wp.default.finish.handler,...) {
 	restore.point("new.wp")
@@ -88,7 +87,7 @@ wp_reset = function(wp=get_wp(), bots=wp$play$bots, human=wp$human) {
 }
 
 #' Copy a web play object
-#' @familiy Web Play
+#' @family Web Play
 wp_copy = function(wp) {
   as.environment(as.list(wp))
 }
