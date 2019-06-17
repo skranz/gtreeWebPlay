@@ -1,0 +1,4 @@
+<h3>Start Kuhn-Poker</h3>
+
+<br>
+{{submitStartPageBtn("Press to start")}}

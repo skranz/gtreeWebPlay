@@ -1,0 +1,14 @@
+<h3>pl2CheckBet</h3>
+<h4>Player: {{.player}}</h4>
+
+
+<h3>Observations</h3>
+<p>
+card2: {{card2}}<br>
+cb1: {{cb1}}
+</p>
+
+{{actionField(name="cb2", label="cb2:", choiceLabels = NULL)}}
+
+<br>
+{{submitPageBtn("Press to proceed")}}

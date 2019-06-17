@@ -1,0 +1,14 @@
+<p>
+<br>
+A new round of Kuhn poker
+<br><br>
+You are <b>player 2</b> and have drawn  <b>{{card_lab[2]}}</b>.
+<br><br>
+Player 1 has <b>bet</b> one additional dollar.
+</p>
+
+{{actionField(name="fc2", label="What do you want to do?", choiceLabels = c("fold", "call and also add a dollar"))}}
+
+<br>
+{{submitPageBtn("Press to continue")}}
+

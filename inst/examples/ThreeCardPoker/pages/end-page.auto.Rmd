@@ -1,0 +1,22 @@
+<h3>You finished a round of Kuhn-Poker</h3>
+
+
+<h3>Realized outcome</h3>
+<p>
+card1: {{card1}}<br>
+card2: {{card2}}<br>
+cb1: {{cb1}}<br>
+cb2: {{cb2}}<br>
+fc2: {{fc2}}<br>
+fc1: {{fc1}}<br>
+folder: {{folder}}<br>
+winner: {{winner}}<br>
+gave1: {{gave1}}<br>
+gave2: {{gave2}}<br>
+pot: {{pot}}<br>
+payoff_1: {{payoff_1}}<br>
+payoff_2: {{payoff_2}}
+</p>
+
+<br>
+{{submitEndBtn("Press to restart")}}

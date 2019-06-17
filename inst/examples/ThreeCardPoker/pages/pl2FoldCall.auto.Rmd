@@ -1,0 +1,14 @@
+<h3>pl2FoldCall</h3>
+<h4>Player: {{.player}}</h4>
+
+
+<h3>Observations</h3>
+<p>
+card2: {{card2}}<br>
+cb1: {{cb1}}
+</p>
+
+{{actionField(name="fc2", label="fc2:", choiceLabels = NULL)}}
+
+<br>
+{{submitPageBtn("Press to proceed")}}

@@ -1,0 +1,34 @@
+#< if (cb1=="check" & cb2=="check")
+You checked. <b>Player 2 also checks</b>.
+#>
+#< if (cb1=="check" & cb2=="bet" & fc1=="fold")
+You checked. Player 2 bet one additional dollar and you folded.
+#>
+#< if (cb1=="check" & cb2=="bet" & fc1=="call")
+You checked. Player 2 bet one additional dollar. You called.
+#>
+#< if (cb1=="bet" & fc2=="fold")
+You have bet one additional dollar and <b>player 2 folds</b>.
+#>
+#< if (cb1=="bet" & fc2=="call")
+You have bet one additional dollar and <b>player 2 calls</b>.
+#>
+
+
+<table>
+<tr>
+  <td style="font-size: 100%;">You</td>
+  <td style="font-size: 100%; padding-left: 20px">Player 2</td>
+</tr>
+<tr>
+  <td style="font-size: 600%;">{{card_sym[1]}}</td>
+  <td style="font-size: 600%; padding-left: 20px;">{{ifelse(is_true(fc1=="fold" | fc2=="fold"),"?",card_sym[2])}}</td>
+</tr>
+</table>
+
+#< if winner==1
+<b>You won {{payoff_1}} dollar this round.</b>
+#>
+#< if winner==2
+<b>You lost {{-payoff_1}} dollar this round.</b>
+#>

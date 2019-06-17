@@ -1,0 +1,7 @@
+<h3>PayoffStage</h3>
+<h4>Player: {{.player}}</h4>
+
+
+
+<br>
+{{submitPageBtn("Press to proceed")}}

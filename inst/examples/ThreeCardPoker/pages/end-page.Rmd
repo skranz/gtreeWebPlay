@@ -1,0 +1,13 @@
+<h4>You finished a round of 3-Card Poker</h4>
+
+#< if (.player == 1)
+#. include end-page-pl1.Rmd
+#>
+#< if (.player == 2)
+#. include end-page-pl2.Rmd
+#>
+
+Total balance after {{.wp$custom$rounds}} rounds:
+<b>{{ifelse(.wp$custom$total.win >=0,"+","")}}{{.wp$custom$total.win}}</b> dollar.
+
+{{submitEndPageBtn("Press to restart")}}

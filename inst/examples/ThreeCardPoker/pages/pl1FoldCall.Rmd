@@ -1,0 +1,10 @@
+<p><br>
+Player 2 <b>bets</b> one additional dollar.
+
+You have {{card_lab[1]}}.
+</p>
+
+{{actionField(name="fc1", label="What do you want to do?", choiceLabels = c("fold", "call and also add a dollar"))}}
+
+{{submitPageBtn("Press to continue")}}
+

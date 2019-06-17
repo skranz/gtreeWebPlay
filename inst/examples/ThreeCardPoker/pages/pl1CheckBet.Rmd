@@ -1,0 +1,9 @@
+<h4>A new round of 3-Card Poker</h4>
+<p>
+You are player 1 and have drawn {{card_lab[1]}}.
+</p>
+
+{{actionField(name="cb1", label="What do you want to do?", choiceLabels = c("check", "bet one extra dollar"))}}
+
+{{submitPageBtn("Press to continue")}}
+
