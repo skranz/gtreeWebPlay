@@ -2,12 +2,7 @@ examples.wpDevelApp = function() {
   setwd(system.file("examples/ThreeCardPoker", package="gtreeWebExp"))
   game = readRDS("game.Rds")
   tables = eq_tables(game)
-  if (!file.exists("pps.Rds")) {
-    pps = new_pps(game)
-  } else {
-    pps = readRDS("pps.Rds")
-  }
-  bots = make_bots(game, bot_pop,pps=pps, alt.bot.fun=bot_eq)
+  bots = make_bots(game, bot_eq)
 
   pre.page.handler = function(values, wp,is.end,human=wp$human,...) {
     # Update by reference wp$custom values
@@ -32,12 +27,10 @@ examples.wpDevelApp = function() {
     )
   }
   post.page.handler = function(wp,play,...) {
-    pps_add_play_actions(wp$pps, play, stage.num=play$human.stage.finished)
     app = getApp()
-    app$glob$pps.changed = TRUE
   }
 
-  wp = new_wp(game, bots, human = 1, verbose=TRUE,pre.page.handler = pre.page.handler, post.page.handler = post.page.handler, custom=list(rounds = 0, total.win=0), pps=pps)
+  wp = new_wp(game, bots, human = 1, verbose=TRUE,pre.page.handler = pre.page.handler, post.page.handler = post.page.handler, custom=list(rounds = 0, total.win=0))
 
 
   app = eventsApp()
@@ -48,19 +41,9 @@ examples.wpDevelApp = function() {
   )
   appInitHandler(function(..., app=getApp()) {
     set_wp_for_app(wp, app)
-    observe(priority = -10000L,{
-      invalidateLater(4000)
-      if (isTRUE(app$glob$pps.changed)) {
-        cat("\npps saved!")
-        app$glob$pps.changed = FALSE
-        saveRDS(get_wp()$pps,"pps.Rds")
-      }
-    })
     wp_continue()
   })
   viewApp(app)
-
-  pps_rearrange(pps)
 }
 
 #' This function should be called in the appInitHandler
@@ -118,9 +101,15 @@ wpDevelApp = function(wp, title = paste0("Playing ", wp$play$game$gameId)) {
 # @family Web Play
 wp_continue = function(wp=get_wp()) {
   restore.point("wpstart.play")
+  if (wp$stage.num >0) {
+    wp$stage_secs[wp$stage.num] = as.numeric(Sys.time())-as.numeric(wp$stage.start.time)
+  } else {
+    wp$start.time = Sys.time()
+  }
   wp_play_until_human(wp)
   ui = make.wp.page.ui(wp)
-  dsetUI(wp$wpUI, ui)
+  wp$stage.start.time = Sys.time()
+  #dsetUI(wp$wpUI, ui)
   setUI(wp$wpUI, ui)
   invisible(wp)
 }
@@ -136,7 +125,7 @@ wp.submit.btn.click = function(formValues, stage.name,action.ids,sm.ids, ..., wp
 	ids = c(action.ids, sm.ids)
 	for (id in ids) {
 		if (isTRUE(length(formValues[[id]])==0) |  isTRUE(formValues[[id]]=="")) {
-			errorMessage(page.ns(page.name)("msg"),"Please make all required choices, before you continue.")
+			errorMessage(page.ns(page.name)("msg"),"Please make all required choices before you continue.")
 			return()
 		}
 	}
@@ -199,7 +188,7 @@ wp_developer_ui = function() {
     wp = get_wp()
     if (is.null(wp)) return()
     ui = make.wp.page.ui(wp)
-    dsetUI(wp$wpUI, ui)
+    #dsetUI(wp$wpUI, ui)
     setUI(wp$wpUI, ui)
   })
 

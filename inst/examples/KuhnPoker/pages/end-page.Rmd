@@ -8,6 +8,6 @@
 #>
 
 Total balance after {{.wp$custom$rounds}} rounds:
-<b>{{ifelse(.wp$custom$total.win >=0,"+","")}}{{.wp$custom$total.win}}</b> dollar.
+<b>{{ifelse(.wp$custom$total_win >=0,"+","")}}{{.wp$custom$total_win}}</b> dollar.
 
 {{submitEndPageBtn("Press to restart")}}

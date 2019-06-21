@@ -1,6 +1,6 @@
 
-page.ns = function(name) {
-	NS(paste0("page-",stage.name,"-",player))
+page.ns = function(page.name) {
+	NS(paste0("page-",page.name))
 }
 
 make.wp.page.ui = function(wp=get_wp(), run.pre.page.handler=TRUE) {
@@ -41,10 +41,8 @@ submitStartPageBtn = function(label="Press to start",wp=get_wp(),...) {
 	id = paste0(ns("submitPageBtn"))
 
 	buttonHandler(id, wp.start.btn.click)
-	try( dsetUI(ns("msg"),""),silent = TRUE)
 	as.character(
 		tagList(
-			uiOutput(ns("msg")),
 			smallButton(id,label)
 		)
 	)
@@ -56,10 +54,8 @@ submitEndPageBtn = function(label="Press to start",wp=get_wp(),...) {
 	id = paste0(ns("submitPageBtn"))
 
 	buttonHandler(id, wp.end.btn.click)
-	dsetUI(ns("msg"),"", app=app)
 	as.character(
 		tagList(
-			uiOutput(ns("msg")),
 			smallButton(id,label)
 		)
 	)
@@ -102,7 +98,7 @@ submitPageBtn = function(label="Press to continue",wp=get_wp(),...) {
 
 	buttonHandler(id, wp.submit.btn.click, stage.name = stage$name, action.ids=action.ids,sm.ids=sm.ids, app = app)
 
-	dsetUI(ns("msg"),"", app=app)
+	try(dsetUI(ns("msg"),"", app=app),silent = TRUE)
 	as.character(
 		tagList(
 			uiOutput(ns("msg")),

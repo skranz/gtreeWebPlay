@@ -57,11 +57,11 @@ bot_tables = function(game, player, tables, name="table_bot",...) {
     name = name,
     player = player,
     choose_action = choose_action_bot_tables,
-    extra.arg = list(tables=tables)
+    tables = tables
   )
   bot
 }
-choose_action_bot_tables = function(play, stage, action,set,tables,...) {
+choose_action_bot_tables = function(bot, play, stage, action,set,tables=bot$tables,...) {
   restore.point("choose_action_bot_tables")
   var = action$name
   table = tables[[var]]
@@ -78,3 +78,55 @@ choose_action_bot_tables = function(play, stage, action,set,tables,...) {
   }
   return(val)
 }
+
+
+#' Bot that mixes between different bots
+#'
+#' The first time the bot is called
+#' for a particular player in a play
+#' He picks a child bot randomly.
+#' Then he continues with that child bot
+#' for this player the whole play.
+#'
+#' If you use \code{\link{\make_bots}} or call
+#' repeatedly \code{bot_mixture} to generate mixture bots
+#' for each player, the child bots will be independently
+#' drawn for each player.
+#'
+#' Instead, if bot1 is a mixture bot for player 1
+#' and you create a bot for player 2 by
+#' \code{bot2 = bot1\nbot2$player = 1}
+#' then bot2 will select in every play the same
+#' child bot than bot1.
+#'
+#' @param game the game object
+#' @param player the player number of this bot
+#' @param child_bots A list of child pots
+#' @param prob A vector of weights for each child bot. If \code{NULL} (default) all are equally likely.
+#' @family Bots
+bot_mixture = function(game,player,child_bots, prob=NULL,...) {
+  bot = list(
+    env = as.environment(list(play_nonce=0, current_child=1)),
+    name = "mixture_bot",
+    player = player,
+    choose_action = function(set,...) {
+      sample(set,1)
+    },
+    child_bots = child_bots,
+    prob = prob
+  )
+  bot
+}
+
+choose_action_bot_mixture = function(bot, play,...) {
+  restore.point("choose_action_bot_mixture")
+
+  # Draw new child if and only if we have a new play
+  if (bot$env$play_nonce != play$play_nonce) {
+    bot$env$play_nonce = play$play_nonce
+    bot$env$current_child = sample.int(length(bot$child_bots),1,prob = bot$prob)
+  }
+  child_bot = bot$child_bots[[bot$env$current_child]]
+  child_bot$choose_action(bot=child_bot, play=play,...)
+}
+

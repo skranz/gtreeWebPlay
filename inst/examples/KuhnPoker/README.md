@@ -1,11 +1,13 @@
-This is a more advanced shiny app to play Three-Card Poker games.
+This is a more advanced shiny app to play Kuhn Poker.
 
 Look at `global.R` for the main code with detailed comments.
 
 Some of the feature of this app:
 
+- Count number of rounds and total wins.
+
 - The pages that specify stages and final results are heavily customized (see pages subfolder).
 
-- Users play against the population of earlier players using `bot_pop`. If not enough data is available for some history, they play against equilibrium strategies.
+- Results of all plays are saved in a csv file.
 
-- All past plays are stored in a SQLite database for possible later analysis. Also the underlying data used by the `bot_pop` is regularly updated.
+- Users play against the population of earlier players using a population bot created with `bot_pop`. If not enough data is available for some history, they play against equilibrium strategies.

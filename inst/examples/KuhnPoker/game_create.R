@@ -1,5 +1,5 @@
 # Set appropriate working directory
-setwd(system.file("examples/ThreeCardPoker", package="gtreeWebPlay"))
+setwd(system.file("examples/KuhnPoker", package="gtreeWebPlay"))
 
 # This is Kuhn's simple 3-Card Poker
 # For details
@@ -81,4 +81,5 @@ game %>%
   game_solve(mixed=TRUE) %>%
   eq_tables()
 
-saveRDS(game,"D:/libraries/gtree/webexp/KuhnPoker/game.Rds")
+saveRDS(game,"game.Rds")
+

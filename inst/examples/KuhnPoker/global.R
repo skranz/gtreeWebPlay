@@ -1,7 +1,7 @@
 library(gtreeWebPlay)
 
 # Set to directory of this app
-setwd(system.file("examples/ThreeCardPoker", package="gtreeWebPlay"))
+setwd(system.file("examples/KuhnPoker", package="gtreeWebPlay"))
 
 # The file game_create.R creates and solves the game
 # For speed purposes, we just load the solved game.
@@ -25,8 +25,22 @@ pre.page.handler = function(values, wp,is.end,human=wp$human,...) {
   # If the game is finished
   # update by reference wp$custom values
   if (is.end) {
+    restore.point("pre.page.last.page")
+
     wp$custom$rounds = wp$custom$rounds+1
-    wp$custom$total.win = wp$custom$total.win+values$payoffs[human]
+    wp$custom$total_win = wp$custom$total_win+values$payoffs[human]
+
+    # Add data of current play to plays.csv
+
+    # Duration of each human stage in seconds
+    secs = as.list(wp$stage_secs)
+    names(secs) = paste0("secs_",names(secs))
+
+    dat = c(list(sessionId=getApp()$sessionId, start_time=wp$start.time, end_time=Sys.time(), rounds=wp$custom$round, total_win=wp$custom$total_win), wp$play$hist, secs) %>% as.data.frame
+    file = "plays.csv"
+    new = !file.exists(file)
+    write.table(dat,file = file, append=!new,col.names=new, row.names=FALSE, sep=",")
+
   }
 
   # Return card vector, card names and card symbols (as large UTF-8 font)
@@ -60,7 +74,7 @@ post.page.handler = function(wp,play,...) {
 }
 
 # The main web play argument
-wp = new_wp(game, bots, human = 1, verbose=TRUE,pre.page.handler = pre.page.handler, post.page.handler = post.page.handler, custom=list(rounds = 0, total.win=0), pps=pps)
+wp = new_wp(game, bots, human = 1, verbose=TRUE,pre.page.handler = pre.page.handler, post.page.handler = post.page.handler, custom=list(rounds = 0, total_win=0), pps=pps)
 
 # Define a shinyEvents app
 app = eventsApp()
@@ -80,9 +94,23 @@ app$ui = fluidPage(
   )
 )
 
+# Check all 2 minutes whether pps has been changed
+# and save it if that is the case
+timerHandler("save_pps_handler",1000*60*2, function(...) {
+  # Call all 2 minutes seconds
+  cat("\nCalled save_pps_handler")
+  if (isTRUE(app$glob$pps.changed)) {
+    cat("\npps saved!")
+    app$glob$pps.changed = FALSE
+    saveRDS(get_wp()$pps,"pps.Rds")
+  }
+})
+
 # The function in appInitHandler will be called when a new app
 # instance starts.
 appInitHandler(function(..., app=getApp()) {
+  # Random sessionId
+  app$sessionId = random.string(1, 20)
   # Assign a deep copy of the web play object
   # to this app instance
   set_wp_for_app(wp, app)
@@ -90,20 +118,7 @@ appInitHandler(function(..., app=getApp()) {
   wp_continue()
 })
 
-# global observe that check all
-# 5 seconds whether the pps
-# file is updated and saves it if that
-# is the case.
-observe(priority = -10000L,{
-  # Call again in 5 seconds
-  invalidateLater(4000)
 
-  if (isTRUE(app$glob$pps.changed)) {
-    cat("\npps saved!")
-    app$glob$pps.changed = FALSE
-    saveRDS(get_wp()$pps,"pps.Rds")
-  }
-})
 
 # This line must be called at the end of the
 # global.R file of a shinyEvents app

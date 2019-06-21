@@ -153,7 +153,8 @@ new_play = function(game, bots, human=NULL) {
     bots = bots,
     human = human,
     bot.player = setdiff(game$players,human),
-    known.vars = vector("list",length(game$players))
+    known.vars = vector("list",length(game$players)),
+    play_nonce = runif(1)
   )
   class(play) = c("gtree_play","list")
   play
@@ -232,8 +233,7 @@ play_stage_auto = function(play) {
     bot  = play$bots[[bot.player]]
     for (action in stage$actions) {
       set = eval.or.return(action$set,env)
-      val = do.call(bot$choose_action, c(list(play=play, action=action, stage=stage, set=set, player=bot.player), bot$extra.arg))
-      #val = bot$choose_action(play=play, action=action, stage=stage, set=set)
+      val = do.call(bot$choose_action, c(list(bot=bot, play=play, action=action, stage=stage, set=set, player=bot.player)))
       if (!isTRUE(val %in% set)) {
         stop(paste0("The bot '", bot$name, "' picked an infeasible value (", val, ") for the action '", action$name,"'"))
       }

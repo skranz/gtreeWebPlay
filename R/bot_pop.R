@@ -28,16 +28,15 @@ bot_pop = function(game, player, pps, alt.bot = NULL, alt.bot.count = 5, name="p
     name = name,
     player = player,
     choose_action = choose_action_bot_pop,
-    extra.arg = list(pps=pps, alt.bot=alt.bot, alt.bot.count=alt.bot.count)
+    pps = pps,
+    alt.bot = alt.bot,
+    alt.bot.count=alt.bot.count
   )
   bot
 }
-choose_action_bot_pop = function(play,player, stage, action,set,pps, alt.bot,alt.bot.count,...) {
+choose_action_bot_pop = function(bot, play,player, stage, action,set,pps=bot$pps, alt.bot=bit$alt.bot,alt.bot.count=bot$alt.bot.count,...) {
   restore.point("choose_action_bot_pop")
-  var = action$name
   df = pps[[stage$name]]
-
-
 
   known.vars = play$known.vars[[player]]
   keys = setdiff(known.vars, names(stage$actions))
@@ -47,7 +46,7 @@ choose_action_bot_pop = function(play,player, stage, action,set,pps, alt.bot,alt
 
   # No observations use alt.bot
   if (NROW(df)==0) {
-    val = do.call(alt.bot$choose_action, c(list(bot=alt.bot,play=play, action=action, stage=stage, set=set, player=player), alt.bot$extra.arg))
+    val = do.call(alt.bot$choose_action, c(list(bot=alt.bot,play=play, action=action, stage=stage, set=set, player=player)))
     return(val)
   }
   # No observations for the current stage yet
@@ -56,7 +55,7 @@ choose_action_bot_pop = function(play,player, stage, action,set,pps, alt.bot,alt
   total.count = sum(df$.count)
   from.alt.bot = sample(c(TRUE,FALSE),1, prob=c(alt.bot.count, total.count))
   if (from.alt.bot) {
-    val = do.call(alt.bot$choose_action, c(list(bot=alt.bot,play=play, action=action, stage=stage, set=set, player=player), alt.bot$extra.arg))
+    val = do.call(alt.bot$choose_action, c(list(bot=alt.bot,play=play, action=action, stage=stage, set=set, player=player)))
   } else {
     val = sample(df[[action$name]], 1, prob = df$.count)
   }

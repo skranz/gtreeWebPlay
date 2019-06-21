@@ -64,7 +64,10 @@ new_wp = function(game,bots,human=1, wpUI="wpUI", verbose=FALSE, pages.dir = fil
 	restore.point("new.wp")
 
   play = new_play(game,bots, human)
-	wp = as.environment(list(play=play, vg=game$vg, stage.num=0, human=human, wpUI=wpUI, num.stages = length(game$vg$stages), verbose=verbose, pages.dir = pages.dir,custom=custom, pre.page.handler = pre.page.handler, post.page.handler=post.page.handler,  finish.handler=finish.handler,...))
+  stage_secs = rep(NA_real_, length(game$vg$stages))
+  names(stage_secs) = names(game$vg$stages)
+
+	wp = as.environment(list(play=play, vg=game$vg, stage.num=0, human=human, wpUI=wpUI, num.stages = length(game$vg$stages), verbose=verbose, pages.dir = pages.dir,custom=custom, pre.page.handler = pre.page.handler, post.page.handler=post.page.handler,  finish.handler=finish.handler, stage_secs=stage_secs,...))
 	wp
 }
 
@@ -83,6 +86,7 @@ wp_reset = function(wp=get_wp(), bots=wp$play$bots, human=wp$human) {
   wp$stage.num = 0
   wp$human = human
   wp$bots = bots
+  wp$stage_secs[] = NA
   invisible(wp)
 }
 
