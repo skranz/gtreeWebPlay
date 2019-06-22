@@ -69,7 +69,7 @@ eval.stratMethRows.block = function(txt,envir=parent.frame(), out.type=first.non
 	action.name = args$action
 	wp = envir$.wp
 
-	stage = wp.stage(wp=wp, player=wp$player)
+	stage = wp.stage(wp=wp)
 	action = stage$actions[[action.name]]
 
 	out = stratMethRows(action=action.name, domain.vals =action$domain.vals, html=html, wp=wp)
@@ -80,7 +80,7 @@ eval.stratMethRows.block = function(txt,envir=parent.frame(), out.type=first.non
 stratMethRows = function(action.name,domain.vals, html,wp=get_wp(),player=wp$player,as.tr = FALSE, ...) {
 	restore.point("stratMethTable")
 	vg = wp$vg
-	stage = wp.stage(wp, player)
+	stage = wp.stage(wp)
 	domain.var = names(domain.vals)
 
 	domain.vals = as_data_frame(domain.vals)

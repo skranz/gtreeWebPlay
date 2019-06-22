@@ -89,7 +89,7 @@ submitPageBtn = function(label="Press to continue",wp=get_wp(),...) {
 	# get ids of all strategy method fields
 	li = lapply(actions[use.sm], function(action) {
 		postfix = paste.matrix.cols(action$domain.vals,sep="_")
-		get.action.input.id(name=paste0(action$name,"_",postfix),wp=wp)
+		get.action.input.id(name=paste0(action$name,"_",postfix))
 	})
 	names(li) = NULL
 	sm.ids = unlist(li)
