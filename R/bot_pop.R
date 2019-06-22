@@ -35,7 +35,7 @@ bot_pop = function(game, player, pps, alt.bot = NULL, alt.bot.count = 5, name="p
   )
   bot
 }
-choose_action_bot_pop = function(bot, play,player, stage, action,set,pps=bot$pps, alt.bot=bit$alt.bot,alt.bot.count=bot$alt.bot.count,...) {
+choose_action_bot_pop = function(bot, play,player, stage, action,set,pps=bot$pps, alt.bot=bot$alt.bot,alt.bot.count=bot$alt.bot.count,...) {
   restore.point("choose_action_bot_pop")
   df = pps[[stage$name]]
 

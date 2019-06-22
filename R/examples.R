@@ -4,7 +4,7 @@
 #' @param dest.dir The destination directory
 deploy_webplay_example = function(example=c("UltimatumGame","KuhnPoker")[1], dest.dir = file.path(getwd(), example)) {
   if (!dir.exists(dest.dir)) {
-    dir.create(dest.dir,recursive = TRUE)
+    dir.create(dest.dir,recursive = FALSE)
   }
   source.dir = system.file(file.path("examples", example), package="gtreeWebPlay")
 
