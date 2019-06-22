@@ -133,7 +133,6 @@ bot_vs_bot.example = function() {
 #' @param return.play.object By default only the outcome of the play as a one-row data frame is returned. If you set \code{return.play.object} an internal \code{play} object will be returned with more detailed information about the simulation run
 #' @family Bots
 #' @family Simulate
-
 play_bot_vs_bot = function(game, bots, return.play.object = FALSE) {
   play = new_play(game=game,bots=bots, human=0)
   while(play$auto.stage.finished < length(game$vg$stages)) {
@@ -142,6 +141,7 @@ play_bot_vs_bot = function(game, bots, return.play.object = FALSE) {
   if (return.play) return(play)
   as_tibble(play$hist)
 }
+
 
 new_play = function(game, bots, human=NULL) {
   play = list(

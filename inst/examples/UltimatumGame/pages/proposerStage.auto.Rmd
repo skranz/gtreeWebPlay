@@ -1,0 +1,7 @@
+<h3>proposerStage</h3>
+<h4>Player: {{.player}}</h4>
+
+
+{{actionField(name="offer", label="offer:", choiceLabels = NULL)}}
+
+{{submitPageBtn("Press to proceed")}}

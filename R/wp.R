@@ -57,18 +57,32 @@ wp.page.file = function(wp=get_wp(), copy.auto=FALSE, make.auto=TRUE) {
 #'
 #' @param game A gtree game generated with \code{\link[gtree]{new_game}}.
 #' @param bots A list with one bots for every player. Also add a bot for the human player. You can call \code{\link{make_bots}} to conveniently create the bots.
-#' @param human index of the player that is played by a human in the web app.
+#' @param human index of the player that is played by a human in the first play of the web app.
+#' @param human_draw_method Method how the index of the human player is determined by default if a new play is started. The default \code{"cycle"} lets the human cycle through all players. \code{"random"} picks a random player, and \code{"fixed"} keeps the current player.
 #' @param wpUI the id of the \code{uiOutput} element in the app ui where the web play will be shown.
 #' @family Web Play
-new_wp = function(game,bots,human=1, wpUI="wpUI", verbose=FALSE, pages.dir = file.path(getwd(),"pages"),custom=list(), pre.page.handler = NULL,post.page.handler = NULL, finish.handler = wp.default.finish.handler,...) {
+new_wp = function(game,bots,human=draw_human_pos(human_draw_method=human_draw_method,numPlayers=game$vg$params$numPlayers, human=0),human_draw_method = c("cycle","random","fixed")[1], wpUI="wpUI", verbose=FALSE, pages.dir = file.path(getwd(),"pages"),custom=list(), pre.page.handler = NULL,post.page.handler = NULL, finish.handler = wp.default.finish.handler, ...) {
 	restore.point("new.wp")
 
   play = new_play(game,bots, human)
   stage_secs = rep(NA_real_, length(game$vg$stages))
   names(stage_secs) = names(game$vg$stages)
 
-	wp = as.environment(list(play=play, vg=game$vg, stage.num=0, human=human, wpUI=wpUI, num.stages = length(game$vg$stages), verbose=verbose, pages.dir = pages.dir,custom=custom, pre.page.handler = pre.page.handler, post.page.handler=post.page.handler,  finish.handler=finish.handler, stage_secs=stage_secs,...))
+	wp = as.environment(list(play=play, vg=game$vg, stage.num=0, human=human,human_draw_method=human_draw_method, wpUI=wpUI, num.stages = length(game$vg$stages), verbose=verbose, pages.dir = pages.dir,custom=custom, pre.page.handler = pre.page.handler, post.page.handler=post.page.handler,  finish.handler=finish.handler, stage_secs=stage_secs,...))
 	wp
+}
+
+draw_human_pos = function(wp=NULL, human_draw_method=wp$human_draw_method, numPlayers=wp$vg$params$numPlayers, human = wp$human) {
+  restore.point("draw_human_pos")
+  if (human_draw_method == "cycle") {
+    human = human+1
+    if (human > numPlayers) human = 1
+  } else if (human_draw_method == "random") {
+    human = sample.int(numPlayers, 1)
+  } else if (human_draw_method=="fixed") {
+    if (human < 1) human = 1
+  }
+  human
 }
 
 #' Reset a web play to the start of a new play
@@ -80,7 +94,7 @@ new_wp = function(game,bots,human=1, wpUI="wpUI", verbose=FALSE, pages.dir = fil
 #' @param bots You can provide new bots. By default the current bots are used again.
 #' @param human You can define a new index of the human player. By default the current human is used.
 #' @family Web Play
-wp_reset = function(wp=get_wp(), bots=wp$play$bots, human=wp$human) {
+wp_reset = function(wp=get_wp(), bots=wp$play$bots, human=draw_human_pos(wp)) {
   restore.point("wp_reset")
   wp$play = new_play(wp$play$game,bots, human)
   wp$stage.num = 0

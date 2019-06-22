@@ -1,0 +1,12 @@
+<h3>responderStage</h3>
+<h4>Player: {{.player}}</h4>
+
+
+<h3>Observations</h3>
+<p>
+offer: {{offer}}
+</p>
+
+{{actionField(name="accept", label="accept:", choiceLabels = NULL)}}
+
+{{submitPageBtn("Press to proceed")}}

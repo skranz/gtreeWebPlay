@@ -77,7 +77,6 @@
      
   </a>
 </li>
-<li class="dropdown-header">Tutorials</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -113,9 +112,11 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>new_wp</span>(<span class='no'>game</span>, <span class='no'>bots</span>, <span class='kw'>human</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>wpUI</span> <span class='kw'>=</span> <span class='st'>"wpUI"</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>pages.dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/file.path'>file.path</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/getwd'>getwd</a></span>(), <span class='st'>"pages"</span>), <span class='kw'>custom</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(),
-  <span class='kw'>pre.page.handler</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>post.page.handler</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>new_wp</span>(<span class='no'>game</span>, <span class='no'>bots</span>, <span class='kw'>human</span> <span class='kw'>=</span> <span class='fu'>draw_human_pos</span>(<span class='kw'>human_draw_method</span> <span class='kw'>=</span>
+  <span class='no'>human_draw_method</span>, <span class='kw'>numPlayers</span> <span class='kw'>=</span> <span class='no'>game</span>$<span class='no'>vg</span>$<span class='no'>params</span>$<span class='no'>numPlayers</span>, <span class='kw'>human</span> <span class='kw'>=</span> <span class='fl'>0</span>),
+  <span class='kw'>human_draw_method</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"cycle"</span>, <span class='st'>"random"</span>, <span class='st'>"fixed"</span>)[<span class='fl'>1</span>], <span class='kw'>wpUI</span> <span class='kw'>=</span> <span class='st'>"wpUI"</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>pages.dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/file.path'>file.path</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/getwd'>getwd</a></span>(), <span class='st'>"pages"</span>),
+  <span class='kw'>custom</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(), <span class='kw'>pre.page.handler</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>post.page.handler</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>finish.handler</span> <span class='kw'>=</span> <span class='no'>wp.default.finish.handler</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -131,16 +132,21 @@
     </tr>
     <tr>
       <th>human</th>
-      <td><p>index of the player that is played by a human in the web app.</p></td>
+      <td><p>index of the player that is played by a human in the first play of the web app.</p></td>
+    </tr>
+    <tr>
+      <th>human_draw_method</th>
+      <td><p>Method how the index of the human player is determined by default if a new play is started. The default <code>"cycle"</code> lets the human cycle through all players. <code>"random"</code> picks a random player, and <code>"fixed"</code> keeps the current player.</p></td>
+    </tr>
+    <tr>
+      <th>wpUI</th>
+      <td><p>the id of the <code>uiOutput</code> element in the app ui where the web play will be shown.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other Bots: <code><a href='bot_eq.html'>bot_eq</a></code>, <code><a href='bot_pop.html'>bot_pop</a></code>,
-  <code><a href='bot_random.html'>bot_random</a></code>, <code><a href='bot_tables.html'>bot_tables</a></code>,
-  <code><a href='make_bots.html'>make_bots</a></code>, <code><a href='play_bot_vs_bot.html'>play_bot_vs_bot</a></code></p>
-<p>Other Web Play: <code><a href='get_wp.html'>get_wp</a></code>,
+    <div class='dont-index'><p>Other Web Play: <code><a href='get_wp.html'>get_wp</a></code>,
   <code><a href='set_wp_for_app.html'>set_wp_for_app</a></code>, <code><a href='wpDevelApp.html'>wpDevelApp</a></code>,
   <code><a href='wp_copy.html'>wp_copy</a></code>, <code><a href='wp_developer_ui.html'>wp_developer_ui</a></code>,
   <code><a href='wp_reset.html'>wp_reset</a></code>, <code><a href='wp_set_to_play.html'>wp_set_to_play</a></code></p></div>

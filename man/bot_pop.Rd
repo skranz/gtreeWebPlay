@@ -23,7 +23,8 @@ Draws actions from previous actions stored
 in population play summary (pps) object
 }
 \seealso{
-Other Bots: \code{\link{bot_eq}}, \code{\link{bot_random}},
+Other Bots: \code{\link{bot_eq}},
+  \code{\link{bot_mixture}}, \code{\link{bot_random}},
   \code{\link{bot_tables}}, \code{\link{make_bots}},
-  \code{\link{new_wp}}, \code{\link{play_bot_vs_bot}}
+  \code{\link{play_bot_vs_bot}}
 }

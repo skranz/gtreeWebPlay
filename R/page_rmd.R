@@ -11,7 +11,7 @@ get.pages.dir = function(game) {
 }
 
 load.page.rmd = function(game, page.name, stage=NULL, pages.dir = get.pages.dir(game=game), file=NULL, make.if.missing = TRUE, remake.auto = !TRUE) {
-	restore.point("load.page")
+	restore.point("load.page.rmd")
 	if (is.null(file)) {
 		file = paste0(page.name,".Rmd")
 		if (!file.exists(file.path(pages.dir,file)) & !remake.auto)
@@ -20,7 +20,7 @@ load.page.rmd = function(game, page.name, stage=NULL, pages.dir = get.pages.dir(
 
 	if (!file.exists(file.path(pages.dir,file))) {
 		if (make.if.missing) {
-		  page = make.page.rmd(game, page.name, pages.dir, return="text")
+		  page = make.page.rmd(game, page.name=page.name, pages.dir=pages.dir)
 		} else {
 			stop(paste0("Page ", page,".Rmd for game ", game$gameId, " does not exist in folder ", pages.dir))
 		}
@@ -31,7 +31,7 @@ load.page.rmd = function(game, page.name, stage=NULL, pages.dir = get.pages.dir(
 }
 
 make.page.rmd = function(game, page.name, stage=NULL, pages.dir = get.pages.dir(game=game)) {
-	restore.point("load.page")
+	restore.point("make.page.rmd")
   if (page.name=="start-page") {
     page = make.start.page.rmd(game,pages.dir = pages.dir)
   } else if (page.name=="end-page") {
@@ -41,7 +41,7 @@ make.page.rmd = function(game, page.name, stage=NULL, pages.dir = get.pages.dir(
   } else {
     page = make.stage.page.rmd(game=game,stage=stage, pages.dir = pages.dir)
   }
-	return(invisble(merge.lines(page)))
+	return(invisible(merge.lines(page)))
 }
 
 

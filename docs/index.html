@@ -46,7 +46,6 @@
      
   </a>
 </li>
-<li class="dropdown-header">Tutorials</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -69,11 +68,27 @@
       
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="gtreewebexp-simple-web-experiments-for-gtree-games" class="section level1">
+<div id="gtreewebexp-create-web-apps-to-play-gtree-games-in-the-web" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#gtreewebexp-simple-web-experiments-for-gtree-games" class="anchor"></a>gtreeWebExp: Simple web experiments for gtree games</h1></div>
+<a href="#gtreewebexp-create-web-apps-to-play-gtree-games-in-the-web" class="anchor"></a>gtreeWebExp: Create web apps to play gtree games in the web</h1></div>
 <p>Author: Sebastian Kranz, Ulm University</p>
-<p>See the tutorials for details.</p>
+<p>This packages is an companion package to <a href="skranz.github.io/gtree">gtree</a>, which allows to specify and solve game theoretic games in a way akin to the specification of economic experiments via stages in <a href="https://www.ztree.uzh.ch/en.html">ztree</a>. <code>gtreeWebExp</code> allows to create simple shin web apps from such games in which a single player can play against <em>bots</em>. A bot could e.g. follow an equilibrium strategy <code>bot_eq</code> or allow the current player to play against randomly drawn strategies of earlier users of the app <code>bot_pop</code>. The appearance of the shown stages can be customized by adapting RMarkdown files that are initially automatically generated.</p>
+<p>An example can be found here …</p>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<p>To install the package will all dependencies simply run</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"gtreeWebPlay"</span>,<span class="dt">repos =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"https://skranz-repo.github.io/drat/"</span>,<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">getOption</a></span>(<span class="st">"repos"</span>)))</a></code></pre></div>
+<p>(I have my own <a href="https://cran.r-project.org/web/packages/drat/index.html">drat</a> powered R repositorium for my own packages. While CRAN ist great, I find it too time consuming to maintain all my packages there and <code><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">devtools::install_github</a></code> does not handle custom dependencies as easily.)</p>
+</div>
+<div id="deploy-an-example-app" class="section level2">
+<h2 class="hasAnchor">
+<a href="#deploy-an-example-app" class="anchor"></a>Deploy an Example App</h2>
+<p>The best way to use `gtree</p>
+<p>The following code deploys a simple Ultimatum Game example app to the directory specified in <code>dest.dir</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="reference/deploy_webplay_example.html">deploy_webplay_example</a></span>(<span class="dt">example=</span><span class="st">"UltimatumGame"</span>,<span class="dt">dest.dir =</span> <span class="st">"D:/gtreeExamples/UltimatumGame"</span>)</a></code></pre></div>
+<p>You can open the <code>global.R</code> file in the destination directory and run in RStudio <code>Run App</code> to run the example. You can adapt the example to create an app for your own game. A more complex example app can be deployed with the argument <code>example="KuhnPoker"</code>.</p>
+</div>
 </div>
   </div>
 

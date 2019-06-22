@@ -2,33 +2,22 @@
 
 Author: Sebastian Kranz, Ulm University
 
+This packages is an companion package to [gtree](skranz.github.io/gtree). `gtree` allows to specify and solve game theoretic games in a way akin to the specification of economic experiments via stages in [ztree](https://www.ztree.uzh.ch/en.html). `gtreeWebExp` allows to create simple shiny web apps from such games in which a single player can play against *bots*. A bot could e.g. follow an equilibrium strategy (see  [bot_eq](file:///D:/libraries/gtree/gtreeWebPlay/docs/reference/bot_eq.html)) or allow the current player to play against randomly drawn strategies of earlier users of the app (see [bot_pop]()). The appearance of the shown stages can be customized by adapting RMarkdown files that are initially automatically generated.
+
+An example can be found here ...
+
+## Installation
+
+To install the package will all dependencies simply run
 ```r
-library(gtreeWebPlay)
-game = new_game(
-  gameId = "UltimatumGame",
-  params = list(numPlayers=2,cake=10),
-  stages = list(
-    stage("proposerStage",
-      player=1,
-      actions = list(
-        action("offer",~0:cake)
-      )
-    ),
-    stage("responderStage",
-      player=2,
-      observe = "offer",
-      actions = list(
-        action("accept",c(FALSE,TRUE))
-      )
-    ),
-    stage("PayoffStage",
-      compute=list(
-        payoff_1 ~ ifelse(accept, cake-offer,0),
-        payoff_2 ~ ifelse(accept, offer,0)
-      )
-    )
-  )
-)
-
-
+install.packages("gtreeWebPlay",repos = c("https://skranz-repo.github.io/drat/",getOption("repos")))
 ```
+(I have my own [drat](https://cran.r-project.org/web/packages/drat/index.html) powered R repositorium for my own packages. While CRAN ist great, I find it too time consuming to maintain all my packages there and `devtools::install_github` does not handle custom dependencies as easily.)
+
+## Deploy an Example App
+
+The best way to get started is to look at an example and modify it for your own purposes. The following code copies all files for a simple Ultimatum Game app to the directory specified in `dest.dir`.
+```r
+deploy_webplay_example(example="UltimatumGame",dest.dir = "D:/gtreeExamples/UltimatumGame")
+```
+You can open the `global.R` file in the destination directory and then press in RStudio `Run App` to run the example. You can adapt the example to create an app for your own game. A more complex example using a population bot can be deployed with the argument `example="KuhnPoker"`.

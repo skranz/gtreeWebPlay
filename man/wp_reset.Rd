@@ -4,7 +4,7 @@
 \alias{wp_reset}
 \title{Reset a web play to the start of a new play}
 \usage{
-wp_reset(wp = get_wp(), bots = wp$play$bots, human = wp$human)
+wp_reset(wp = get_wp(), bots = wp$play$bots, human = draw_human_pos(wp))
 }
 \arguments{
 \item{wp}{A web play object}

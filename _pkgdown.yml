@@ -5,7 +5,6 @@ navbar:
   structure:
     left:
     - home
-    - articles
     - reference
     right: github
   components:
@@ -15,8 +14,6 @@ navbar:
     reference:
       text: Reference
       href: reference/index.html
-    articles:
-      text: Tutorials
     github:
       icon: fa-github fa-lg
       href: https://github.com/skranz/gtree

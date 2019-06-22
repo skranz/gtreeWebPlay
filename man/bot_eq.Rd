@@ -18,8 +18,8 @@ bot_eq(game, player, eq = game$eq.li[[1]], eq.tables = gtree::eq_tables(game
 Bot that plays according to a specified equilibrium
 }
 \seealso{
-Other Bots: \code{\link{bot_pop}},
-  \code{\link{bot_random}}, \code{\link{bot_tables}},
-  \code{\link{make_bots}}, \code{\link{new_wp}},
+Other Bots: \code{\link{bot_mixture}},
+  \code{\link{bot_pop}}, \code{\link{bot_random}},
+  \code{\link{bot_tables}}, \code{\link{make_bots}},
   \code{\link{play_bot_vs_bot}}
 }

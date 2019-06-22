@@ -70,11 +70,16 @@ choose_action_bot_tables = function(bot, play, stage, action,set,tables=bot$tabl
   keys = setdiff(keys, names(play$hist)[is.na(play$hist)])
   if (has.col(table, ".prob")) {
     # Mixed strategy table
-    table = semi_join(table, hist.df, by=keys)
+    if (length(keys)>0)
+      table = semi_join(table, hist.df, by=keys)
     val = sample(table[[var]],1, prob = table$.prob)
   } else {
     # Pure strategy table
-    val = semi_join(table, hist.df, by=keys)[[var]]
+    if (length(keys)>0) {
+      val = semi_join(table, hist.df, by=keys)[[var]]
+    } else {
+      val = table[[var]]
+    }
   }
   return(val)
 }
@@ -85,7 +90,7 @@ choose_action_bot_tables = function(bot, play, stage, action,set,tables=bot$tabl
 #' The first time the bot is called
 #' for a particular player in a play
 #' He picks a child bot randomly.
-#' Then he continues with that child bot
+#' Then it continues with that child bot
 #' for this player the whole play.
 #'
 #' If you use \code{\link{\make_bots}} or call
@@ -94,8 +99,8 @@ choose_action_bot_tables = function(bot, play, stage, action,set,tables=bot$tabl
 #' drawn for each player.
 #'
 #' Instead, if bot1 is a mixture bot for player 1
-#' and you create a bot for player 2 by
-#' \code{bot2 = bot1\nbot2$player = 1}
+#' and you create a mixture bot for player 2 by
+#' \code{bot2 = bot1\nbot2$player = 2}
 #' then bot2 will select in every play the same
 #' child bot than bot1.
 #'
@@ -109,9 +114,7 @@ bot_mixture = function(game,player,child_bots, prob=NULL,...) {
     env = as.environment(list(play_nonce=0, current_child=1)),
     name = "mixture_bot",
     player = player,
-    choose_action = function(set,...) {
-      sample(set,1)
-    },
+    choose_action = choose_action_bot_mixture,
     child_bots = child_bots,
     prob = prob
   )

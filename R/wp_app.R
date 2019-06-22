@@ -100,7 +100,7 @@ wpDevelApp = function(wp, title = paste0("Playing ", wp$play$game$gameId)) {
 #
 # @family Web Play
 wp_continue = function(wp=get_wp()) {
-  restore.point("wpstart.play")
+  restore.point("wp_continue")
   if (wp$stage.num >0) {
     wp$stage_secs[wp$stage.num] = as.numeric(Sys.time())-as.numeric(wp$stage.start.time)
   } else {
@@ -109,7 +109,7 @@ wp_continue = function(wp=get_wp()) {
   wp_play_until_human(wp)
   ui = make.wp.page.ui(wp)
   wp$stage.start.time = Sys.time()
-  #dsetUI(wp$wpUI, ui)
+  dsetUI(wp$wpUI, ui)
   setUI(wp$wpUI, ui)
   invisible(wp)
 }
@@ -146,8 +146,7 @@ wp.submit.btn.click = function(formValues, stage.name,action.ids,sm.ids, ..., wp
 }
 
 wp.default.finish.handler = function(wp,...) {
-  human = sample(wp.game(wp)$players,1)
-  wp_reset(wp,human=human)
+  wp_reset(wp)
   wp_continue(wp)
 }
 
@@ -165,7 +164,8 @@ wp_developer_ui = function() {
     simpleButton("develChangePlayerBtn","Change Player", class.add="btn-xs")
   )
   buttonHandler("develStartPlayBtn", function(..., app=getApp()) {
-    wp_reset()
+    wp = get_wp()
+    wp_reset(wp=wp, human=wp$human)
     wp_continue()
   })
   buttonHandler("develChangePlayerBtn", function(..., app=getApp()) {
@@ -188,7 +188,7 @@ wp_developer_ui = function() {
     wp = get_wp()
     if (is.null(wp)) return()
     ui = make.wp.page.ui(wp)
-    #dsetUI(wp$wpUI, ui)
+    dsetUI(wp$wpUI, ui)
     setUI(wp$wpUI, ui)
   })
 

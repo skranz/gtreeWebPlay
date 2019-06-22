@@ -1,4 +1,6 @@
-This is a more advanced shiny app to play Kuhn Poker.
+This is a more advanced shiny app to play Kuhn Poker. 
+For an introductionary example take first a look at the UltimatumGame example app.
+
 
 Look at `global.R` for the main code with detailed comments.
 

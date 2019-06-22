@@ -1,0 +1,22 @@
+<br>
+This page is shown after one round of play is finished. I have customized the page a bit. You can further adapt it by pressing "Edit Page". The current version already uses some `#< if` ... `#>` blocks which simplify conditional formatting.
+
+<h3>You finished a round of UltimatumGame</h3>
+
+
+<!-- Some conditional formatting using '#< if' blocks -->
+#< if .player == 1
+You have been the proposer. You offered the responder {{offer}} of {{cake}}. The responder <b>{{ifelse(accept, "accepted", "rejected")}}</b> your offer.
+#>
+#< if .player == 2
+You have been the responder and been offered {{offer}} from a total cake of {{cake}}. You <b>{{ifelse(accept, "accepted", "rejected")}}</b> your offer.
+#>
+
+<!-- You can also do some conditional formatting without '#< if' blocks -->
+
+<b>Your payoff is {{payoffs[.player]}}</b>.
+
+<b>The {{ifelse(.player==1,"responder","proposer")}} gets {{payoffs[3-.player]}}</b>.
+
+<br>
+{{submitEndPageBtn("Press for a new round.")}}

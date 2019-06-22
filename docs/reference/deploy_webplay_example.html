@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a simple app for testing and developing a gtree web play — wpDevelApp • gtreeWebPlay</title>
+<title>Deploys an example app to local directory — deploy_webplay_example • gtreeWebPlay</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Create a simple app for testing and developing a gtree web play — wpDevelApp" />
+<meta property="og:title" content="Deploys an example app to local directory — deploy_webplay_example" />
 
-<meta property="og:description" content="Returns a shinyEvents app. You can view the app in RStudio using [shinyEvents]viewApp" />
+<meta property="og:description" content="Deploys an example app to local directory" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -101,38 +101,32 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a simple app for testing and developing a gtree web play</h1>
-    <small class="dont-index">Source: <a href='https://github.com/skranz/gtreeWebPlay/blob/master/R/wp_app.R'><code>R/wp_app.R</code></a></small>
-    <div class="hidden name"><code>wpDevelApp.Rd</code></div>
+    <h1>Deploys an example app to local directory</h1>
+    <small class="dont-index">Source: <a href='https://github.com/skranz/gtreeWebPlay/blob/master/R/examples.R'><code>R/examples.R</code></a></small>
+    <div class="hidden name"><code>deploy_webplay_example.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Returns a shinyEvents app. You can view the app in RStudio using <code>[shinyEvents]viewApp</code></p>
+    <p>Deploys an example app to local directory</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>wpDevelApp</span>(<span class='no'>wp</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>(<span class='st'>"Playing "</span>, <span class='no'>wp</span>$<span class='no'>play</span>$<span class='no'>game</span>$<span class='no'>gameId</span>))</pre>
+    <pre class="usage"><span class='fu'>deploy_webplay_example</span>(<span class='kw'>example</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"UltimatumGame"</span>, <span class='st'>"KuhnPoker"</span>)[<span class='fl'>1</span>],
+  <span class='kw'>dest.dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/file.path'>file.path</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/getwd'>getwd</a></span>(), <span class='no'>example</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>wp</th>
-      <td><p>a web play object generated with <code><a href='new_wp.html'>new_wp</a></code></p></td>
+      <th>example</th>
+      <td><p>Name of the example. Current options are 1. <code>"UltimatumGame"</code> a simple introductionary app and 2.<code>"KuhnPoker"</code> a more complex app that implements a <code><a href='bot_pop.html'>bot_pop</a></code> to play against the population of earlier players.</p></td>
     </tr>
     <tr>
-      <th>title</th>
-      <td><p>A title string</p></td>
+      <th>dest.dir</th>
+      <td><p>The destination directory</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Other Web Play: <code><a href='get_wp.html'>get_wp</a></code>, <code><a href='new_wp.html'>new_wp</a></code>,
-  <code><a href='set_wp_for_app.html'>set_wp_for_app</a></code>, <code><a href='wp_copy.html'>wp_copy</a></code>,
-  <code><a href='wp_developer_ui.html'>wp_developer_ui</a></code>, <code><a href='wp_reset.html'>wp_reset</a></code>,
-  <code><a href='wp_set_to_play.html'>wp_set_to_play</a></code></p></div>
     
 
   </div>
@@ -140,9 +134,7 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#see-also">See also</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>

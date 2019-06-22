@@ -17,7 +17,8 @@ bot_tables(game, player, tables, name = "table_bot", ...)
 Bot whose actions are determined by key-action tables
 }
 \seealso{
-Other Bots: \code{\link{bot_eq}}, \code{\link{bot_pop}},
+Other Bots: \code{\link{bot_eq}},
+  \code{\link{bot_mixture}}, \code{\link{bot_pop}},
   \code{\link{bot_random}}, \code{\link{make_bots}},
-  \code{\link{new_wp}}, \code{\link{play_bot_vs_bot}}
+  \code{\link{play_bot_vs_bot}}
 }

@@ -4,9 +4,11 @@
 \alias{new_wp}
 \title{Create a new web play object}
 \usage{
-new_wp(game, bots, human = 1, wpUI = "wpUI", verbose = FALSE,
-  pages.dir = file.path(getwd(), "pages"), custom = list(),
-  pre.page.handler = NULL, post.page.handler = NULL,
+new_wp(game, bots, human = draw_human_pos(human_draw_method =
+  human_draw_method, numPlayers = game$vg$params$numPlayers, human = 0),
+  human_draw_method = c("cycle", "random", "fixed")[1], wpUI = "wpUI",
+  verbose = FALSE, pages.dir = file.path(getwd(), "pages"),
+  custom = list(), pre.page.handler = NULL, post.page.handler = NULL,
   finish.handler = wp.default.finish.handler, ...)
 }
 \arguments{
@@ -14,16 +16,16 @@ new_wp(game, bots, human = 1, wpUI = "wpUI", verbose = FALSE,
 
 \item{bots}{A list with one bots for every player. Also add a bot for the human player. You can call \code{\link{make_bots}} to conveniently create the bots.}
 
-\item{human}{index of the player that is played by a human in the web app.}
+\item{human}{index of the player that is played by a human in the first play of the web app.}
+
+\item{human_draw_method}{Method how the index of the human player is determined by default if a new play is started. The default \code{"cycle"} lets the human cycle through all players. \code{"random"} picks a random player, and \code{"fixed"} keeps the current player.}
+
+\item{wpUI}{the id of the \code{uiOutput} element in the app ui where the web play will be shown.}
 }
 \description{
 Create a new web play object
 }
 \seealso{
-Other Bots: \code{\link{bot_eq}}, \code{\link{bot_pop}},
-  \code{\link{bot_random}}, \code{\link{bot_tables}},
-  \code{\link{make_bots}}, \code{\link{play_bot_vs_bot}}
-
 Other Web Play: \code{\link{get_wp}},
   \code{\link{set_wp_for_app}}, \code{\link{wpDevelApp}},
   \code{\link{wp_copy}}, \code{\link{wp_developer_ui}},

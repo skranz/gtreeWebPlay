@@ -19,6 +19,7 @@
 #' @param alt.bot a bot who will be aksed if there are too few observations in the popoulation
 #' @param alt.bot.count we assume that we already have this many observations for alt.bot. This determines the probability to draw from the alt.bot instead of the population
 #' @family Bots
+#' @family population play functions
 bot_pop = function(game, player, pps, alt.bot = NULL, alt.bot.count = 5, name="pop_bot", alt.bot.fun = bot_random,...) {
   if (is.null(alt.bot)) {
     alt.bot = alt.bot.fun(game=game, player=player,...)
@@ -65,7 +66,7 @@ choose_action_bot_pop = function(bot, play,player, stage, action,set,pps=bot$pps
 
 #' Create a new empty population play summary
 #'
-#' @family Population Play Bot
+#' @family population play functions
 new_pps = function(...) {
   pps = as.environment(list())
   class(pps) = c("gtree_pps","environment")
@@ -77,7 +78,7 @@ new_pps = function(...) {
 #' If the pps is dynamically created during plays
 #' the column order may change
 #'
-#' @family Population Play Bot
+#' @family population play functions
 pps_rearrange = function(pps) {
   # Create empty tables for every stage
   vars = NULL
@@ -104,7 +105,7 @@ print.gtree_pps = function(pps,...) {
 #' Call this function in the post.page.handler
 #' to update the population play summary
 #'
-#' @family Population Play Bot
+#' @family population play functions
 pps_add_play_actions = function(pps,play, stage.num = play$human.stage.finished) {
   restore.point("pps_add_play_actions")
 

@@ -1,0 +1,13 @@
+<h3>You finished a round of UltimatumGame</h3>
+
+
+<h3>Realized outcome</h3>
+<p>
+offer: {{offer}}<br>
+accept: {{accept}}<br>
+payoff_1: {{payoff_1}}<br>
+payoff_2: {{payoff_2}}
+</p>
+
+<br>
+{{submitEndPageBtn("Press to restart")}}

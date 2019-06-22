@@ -1,0 +1,14 @@
+<br>
+Below is the automatically generated page for the proposer Stage. Press "Edit Page" to open a copy in RStudio that you can adapt and make look nicer. Then save the file and press "Refresh Page".
+
+<h3>proposerStage</h3>
+<h4>Player: {{.player}}</h4>
+
+
+{{actionField(name="offer", label="offer:", choiceLabels = NULL)}}
+
+{{submitPageBtn("Press to proceed")}}
+
+Note: You can add arbitrary R code inside whiskers, like `{{sum(1:10)}}`. You should keep the `actionField` and the `submitPageBtn` but you can adapt its arguments.
+
+
