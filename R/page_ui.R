@@ -43,7 +43,7 @@ submitStartPageBtn = function(label="Press to start",wp=get_wp(),...) {
 	buttonHandler(id, wp.start.btn.click)
 	as.character(
 		tagList(
-			smallButton(id,label)
+			simpleButton(id,label,...)
 		)
 	)
 }
@@ -56,7 +56,7 @@ submitEndPageBtn = function(label="Press to start",wp=get_wp(),...) {
 	buttonHandler(id, wp.end.btn.click)
 	as.character(
 		tagList(
-			smallButton(id,label)
+			simpleButton(id,label,...)
 		)
 	)
 }
@@ -102,7 +102,7 @@ submitPageBtn = function(label="Press to continue",wp=get_wp(),...) {
 	as.character(
 		tagList(
 			uiOutput(ns("msg")),
-			smallButton(id,label, form.ids = c(wp$submit.ids, action.ids,sm.ids))
+			simpleButton(id,label, form.ids = c(wp$submit.ids, action.ids,sm.ids),...)
 		)
 	)
 }
