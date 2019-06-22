@@ -3,8 +3,8 @@
 #' @param example Name of the example. Current options are \n\t1. \code{"UltimatumGame"} a simple introductionary app and \n\t2.\code{"KuhnPoker"} a more complex app that implements a \code{\link{bot_pop}} to play against the population of earlier players.
 #' @param dest.dir The destination directory
 deploy_webplay_example = function(example=c("UltimatumGame","KuhnPoker")[1], dest.dir = file.path(getwd(), example)) {
-  if (!file.exist(dest.dir)) {
-    dir.create(dest.dir)
+  if (!dir.exists(dest.dir)) {
+    dir.create(dest.dir,recursive = TRUE)
   }
   source.dir = system.file(file.path("examples", example), package="gtreeWebPlay")
 
