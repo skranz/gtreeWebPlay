@@ -10,6 +10,7 @@ new_pps(...)
 Create a new empty population play summary
 }
 \seealso{
-Other Population Play Bot: \code{\link{pps_add_play_actions}},
+Other population play functions: \code{\link{bot_pop}},
+  \code{\link{pps_add_play_actions}},
   \code{\link{pps_rearrange}}
 }

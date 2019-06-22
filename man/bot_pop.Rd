@@ -27,4 +27,8 @@ Other Bots: \code{\link{bot_eq}},
   \code{\link{bot_mixture}}, \code{\link{bot_random}},
   \code{\link{bot_tables}}, \code{\link{make_bots}},
   \code{\link{play_bot_vs_bot}}
+
+Other population play functions: \code{\link{new_pps}},
+  \code{\link{pps_add_play_actions}},
+  \code{\link{pps_rearrange}}
 }

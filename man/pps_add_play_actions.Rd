@@ -12,6 +12,6 @@ Call this function in the post.page.handler
 to update the population play summary
 }
 \seealso{
-Other Population Play Bot: \code{\link{new_pps}},
-  \code{\link{pps_rearrange}}
+Other population play functions: \code{\link{bot_pop}},
+  \code{\link{new_pps}}, \code{\link{pps_rearrange}}
 }
