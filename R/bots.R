@@ -93,7 +93,7 @@ choose_action_bot_tables = function(bot, play, stage, action,set,tables=bot$tabl
 #' Then it continues with that child bot
 #' for this player the whole play.
 #'
-#' If you use \code{\link{\make_bots}} or call
+#' If you use \code{\link{make_bots}} or call
 #' repeatedly \code{bot_mixture} to generate mixture bots
 #' for each player, the child bots will be independently
 #' drawn for each player.
