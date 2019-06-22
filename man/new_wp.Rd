@@ -21,6 +21,18 @@ new_wp(game, bots, human = draw_human_pos(human_draw_method =
 \item{human_draw_method}{Method how the index of the human player is determined by default if a new play is started. The default \code{"cycle"} lets the human cycle through all players. \code{"random"} picks a random player, and \code{"fixed"} keeps the current player.}
 
 \item{wpUI}{the id of the \code{uiOutput} element in the app ui where the web play will be shown.}
+
+\item{verbose}{shall information about state of play be printed to the standard output?}
+
+\item{pages.dir}{the directory in which the Rmd files for the stage pages can be found. By default \code{"./pages"}.}
+
+\item{custom}{A list of custom parameters that will be passed to handlers.}
+
+\item{pre.page.handler}{a function that is called before a page is shown to a human. It should return a list of values that can be accessed in the whiskers {{ }} of the page Rmd file.}
+
+\item{post.page.handler}{a function that is called after a human made input in a stage. Can for example be used to update a population play summary. (See the KuhnPoker example)}
+
+\item{finish.handler}{is called when the final results page of a play is left. The default handler simply starts a new play.}
 }
 \description{
 Create a new web play object

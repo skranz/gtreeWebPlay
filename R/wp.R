@@ -60,6 +60,12 @@ wp.page.file = function(wp=get_wp(), copy.auto=FALSE, make.auto=TRUE) {
 #' @param human index of the player that is played by a human in the first play of the web app.
 #' @param human_draw_method Method how the index of the human player is determined by default if a new play is started. The default \code{"cycle"} lets the human cycle through all players. \code{"random"} picks a random player, and \code{"fixed"} keeps the current player.
 #' @param wpUI the id of the \code{uiOutput} element in the app ui where the web play will be shown.
+#' @param verbose shall information about state of play be printed to the standard output?
+#' @param pages.dir the directory in which the Rmd files for the stage pages can be found. By default \code{"./pages"}.
+#' @param custom A list of custom parameters that will be passed to handlers.
+#' @param pre.page.handler a function that is called before a page is shown to a human. It should return a list of values that can be accessed in the whiskers {{ }} of the page Rmd file.
+#' @param post.page.handler a function that is called after a human made input in a stage. Can for example be used to update a population play summary. (See the KuhnPoker example)
+#' @param finish.handler is called when the final results page of a play is left. The default handler simply starts a new play.
 #' @family Web Play
 new_wp = function(game,bots,human=draw_human_pos(human_draw_method=human_draw_method,numPlayers=game$vg$params$numPlayers, human=0),human_draw_method = c("cycle","random","fixed")[1], wpUI="wpUI", verbose=FALSE, pages.dir = file.path(getwd(),"pages"),custom=list(), pre.page.handler = NULL,post.page.handler = NULL, finish.handler = wp.default.finish.handler, ...) {
 	restore.point("new.wp")

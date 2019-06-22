@@ -142,6 +142,30 @@
       <th>wpUI</th>
       <td><p>the id of the <code>uiOutput</code> element in the app ui where the web play will be shown.</p></td>
     </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>shall information about state of play be printed to the standard output?</p></td>
+    </tr>
+    <tr>
+      <th>pages.dir</th>
+      <td><p>the directory in which the Rmd files for the stage pages can be found. By default <code>"./pages"</code>.</p></td>
+    </tr>
+    <tr>
+      <th>custom</th>
+      <td><p>A list of custom parameters that will be passed to handlers.</p></td>
+    </tr>
+    <tr>
+      <th>pre.page.handler</th>
+      <td><p>a function that is called before a page is shown to a human. It should return a list of values that can be accessed in the whiskers   of the page Rmd file.</p></td>
+    </tr>
+    <tr>
+      <th>post.page.handler</th>
+      <td><p>a function that is called after a human made input in a stage. Can for example be used to update a population play summary. (See the KuhnPoker example)</p></td>
+    </tr>
+    <tr>
+      <th>finish.handler</th>
+      <td><p>is called when the final results page of a play is left. The default handler simply starts a new play.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
