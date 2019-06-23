@@ -4,7 +4,7 @@ Author: Sebastian Kranz, Ulm University
 
 This packages is an companion package to [gtree](skranz.github.io/gtree). `gtree` allows to specify and solve game theoretic games in a way akin to the specification of economic experiments via stages in [ztree](https://www.ztree.uzh.ch/en.html). `gtreeWebExp` allows to create simple shiny web apps from such games in which a single player can play against *bots*. A bot could e.g. follow an equilibrium strategy (see  [bot_eq](file:///D:/libraries/gtree/gtreeWebPlay/docs/reference/bot_eq.html)) or allow the current player to play against randomly drawn strategies of earlier users of the app (see [bot_pop]()). The appearance of the shown stages can be customized by adapting RMarkdown files that are initially automatically generated.
 
-As Github does not show embedded iframes in the README.md. Take a look at [skranz.github.io/gtreeWebPlay](skranz.github.io/gtreeWebPlay) for an embedded example.
+Below is an embedded shiny app that allows you to play [Kuhn Poker](https://en.wikipedia.org/wiki/Kuhn_poker) against randomly drawn earlier players:
 
 <div align="center" style="width: 80%; padding-left: 1em; height: 30em;">
 <iframe align="center" style="width: 100%; height: 100%; border-width: 0; border-style: solid;" src="http://econ.mathematik.uni-ulm.de:3111/KuhnPoker"/>
