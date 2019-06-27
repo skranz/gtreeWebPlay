@@ -81,6 +81,7 @@ choose_action_bot_tables = function(bot, play, stage, action,set,tables=bot$tabl
       val = table[[var]]
     }
   }
+  cat("\nend action bot tables")
   return(val)
 }
 

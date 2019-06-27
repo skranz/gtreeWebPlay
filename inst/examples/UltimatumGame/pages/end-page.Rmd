@@ -20,3 +20,4 @@ You have been the responder and been offered {{offer}} from a total cake of {{ca
 
 <br>
 {{submitEndPageBtn("Press for a new round.")}}
+

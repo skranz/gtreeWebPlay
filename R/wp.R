@@ -66,15 +66,16 @@ wp.page.file = function(wp=get_wp(), copy.auto=FALSE, make.auto=TRUE) {
 #' @param pre.page.handler a function that is called before a page is shown to a human. It should return a list of values that can be accessed in the whiskers {{ }} of the page Rmd file.
 #' @param post.page.handler a function that is called after a human made input in a stage. Can for example be used to update a population play summary. (See the KuhnPoker example)
 #' @param finish.handler is called when the final results page of a play is left. The default handler simply starts a new play.
+#' @param page.ui.fun optionally a function that returns for each page a shiny tag that will be shown. If NULL (default) we specify the page ui via Rmd files in the pages subfolder.
 #' @family Web Play
-new_wp = function(game,bots,human=draw_human_pos(human_draw_method=human_draw_method,numPlayers=game$vg$params$numPlayers, human=0),human_draw_method = c("cycle","random","fixed")[1], wpUI="wpUI", verbose=FALSE, pages.dir = file.path(getwd(),"pages"),custom=list(), pre.page.handler = NULL,post.page.handler = NULL, finish.handler = wp.default.finish.handler, ...) {
+new_wp = function(game,bots,human=draw_human_pos(human_draw_method=human_draw_method,numPlayers=game$vg$params$numPlayers, human=0),human_draw_method = c("cycle","random","fixed")[1], wpUI="wpUI", verbose=FALSE, pages.dir = file.path(getwd(),"pages"),custom=list(), pre.page.handler = NULL,post.page.handler = NULL, finish.handler = wp.default.finish.handler, comp.pages = as.environment(list()), page.ui.fun=NULL,  ...) {
 	restore.point("new.wp")
 
   play = new_play(game,bots, human)
   stage_secs = rep(NA_real_, length(game$vg$stages))
   names(stage_secs) = names(game$vg$stages)
 
-	wp = as.environment(list(play=play, vg=game$vg, stage.num=0, human=human,human_draw_method=human_draw_method, wpUI=wpUI, num.stages = length(game$vg$stages), verbose=verbose, pages.dir = pages.dir,custom=custom, pre.page.handler = pre.page.handler, post.page.handler=post.page.handler,  finish.handler=finish.handler, stage_secs=stage_secs,...))
+	wp = as.environment(list(play=play, vg=game$vg, stage.num=0, human=human,human_draw_method=human_draw_method, wpUI=wpUI, num.stages = length(game$vg$stages), verbose=verbose, pages.dir = pages.dir,custom=custom, pre.page.handler = pre.page.handler, post.page.handler=post.page.handler,  finish.handler=finish.handler, stage_secs=stage_secs,comp.pages=comp.pages, page.ui.fun=page.ui.fun,...))
 	wp
 }
 

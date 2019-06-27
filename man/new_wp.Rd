@@ -9,7 +9,8 @@ new_wp(game, bots, human = draw_human_pos(human_draw_method =
   human_draw_method = c("cycle", "random", "fixed")[1], wpUI = "wpUI",
   verbose = FALSE, pages.dir = file.path(getwd(), "pages"),
   custom = list(), pre.page.handler = NULL, post.page.handler = NULL,
-  finish.handler = wp.default.finish.handler, ...)
+  finish.handler = wp.default.finish.handler,
+  comp.pages = as.environment(list()), page.ui.fun = NULL, ...)
 }
 \arguments{
 \item{game}{A gtree game generated with \code{\link[gtree]{new_game}}.}
@@ -33,6 +34,8 @@ new_wp(game, bots, human = draw_human_pos(human_draw_method =
 \item{post.page.handler}{a function that is called after a human made input in a stage. Can for example be used to update a population play summary. (See the KuhnPoker example)}
 
 \item{finish.handler}{is called when the final results page of a play is left. The default handler simply starts a new play.}
+
+\item{page.ui.fun}{optionally a function that returns for each page a shiny tag that will be shown. If NULL (default) we specify the page ui via Rmd files in the pages subfolder.}
 }
 \description{
 Create a new web play object

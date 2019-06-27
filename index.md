@@ -23,6 +23,9 @@ install.packages("gtreeWebPlay",repos = c("https://skranz-repo.github.io/drat/",
 
 The best way to get started is to look at an example and modify it for your own purposes. The following code copies all files for a simple Ultimatum Game app to the directory specified in `dest.dir`.
 ```r
-deploy_webplay_example(example="UltimatumGame",dest.dir = "D:/gtreeExamples/UltimatumGame")
+deploy_webplay_example(
+  example="UltimatumGame",
+  dest.dir = "D:/gtreeExamples/UltimatumGame"
+)
 ```
 You can open the `global.R` file in the destination directory and then press in RStudio `Run App` to run the example. You can adapt the example to create an app for your own game. A more complex example using a population bot can be deployed with the argument `example="KuhnPoker"`.

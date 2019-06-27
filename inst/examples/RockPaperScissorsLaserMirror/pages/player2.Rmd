@@ -1,0 +1,3 @@
+{{actionField(name="a2", label="Choose your action:", choiceLabels = labels)}}
+
+{{submitPageBtn("Press to proceed")}}

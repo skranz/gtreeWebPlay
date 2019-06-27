@@ -3,10 +3,43 @@ page.ns = function(page.name) {
 	NS(paste0("page-",page.name))
 }
 
+
 make.wp.page.ui = function(wp=get_wp(), run.pre.page.handler=TRUE) {
+  restore.point("make.wp.page.ui")
+  page.name = wp.page.name(wp)
+  compute.wp.page.values(wp,page.name,run.pre.page.handler=run.pre.page.handler)
+  if (is.null(wp$page.ui.fun)) {
+    default.page.ui.fun(wp, page.name=page.name)
+  } else {
+    wp$page.ui.fun(wp, page.name=page.name, values=wp$page.values)
+  }
+}
+
+default.page.ui.fun = function(wp, page.name = wp.page.name(wp),...) {
+
+  page.comp = wp$page.comp[[page.name]]
+
+  if (is.null(page.comp)) {
+    page.rmd = load.page.rmd(game = wp.game(wp),page.name = page.name, stage=wp.stage(wp), pages.dir = wp.pages.dir(wp)) %>% sep.lines()
+
+    page.rmd = adapt.rmd.include(page.rmd,dir = wp.pages.dir(wp), nested=TRUE)
+    page.rmd = merge.lines(page.rmd)
+
+	  page.comp = wp$page.comp[[page.name]] = compile.rmd(text=page.rmd, out.type = "shiny",envir = wp$page.values)
+
+  }
+
+  ui = render.compiled.rmd(page.comp,envir=wp$page.values,use.commonmark=FALSE,fragment.only = TRUE,out.type = "shiny")
+	ui
+
+}
+
+old.make.wp.page.ui = function(wp=get_wp(), run.pre.page.handler=TRUE) {
   restore.point("make.wp.page.ui")
   play = wp$play
   page.name = wp.page.name(wp)
+
+  page.comp = wp$page.comp[[page.name]]
 
   page.rmd = load.page.rmd(game = wp.game(wp),page.name = page.name, stage=wp.stage(wp), pages.dir = wp.pages.dir(wp)) %>% sep.lines()
 
@@ -29,6 +62,8 @@ make.wp.page.ui = function(wp=get_wp(), run.pre.page.handler=TRUE) {
 	# will only be temporary assigned
 	ns = NS(paste0("page-",page.name))
 	cr = compile.rmd(text=page.rmd, out.type = "shiny",envir = wp$page.values,blocks = "render")
+
+
   ui = render.compiled.rmd(cr,envir=wp$page.values,use.commonmark=FALSE)
 	ui
 }
@@ -70,7 +105,7 @@ wp.end.btn.click = function(wp=get_wp(),...) {
 }
 
 
-submitPageBtn = function(label="Press to continue",wp=get_wp(),...) {
+submitPageBtn = function(label="Press to continue",wp=get_wp(),as.tag=FALSE,...) {
 	restore.point("submitPageBtn")
 	stage = wp.stage(wp=wp)
 
@@ -99,16 +134,18 @@ submitPageBtn = function(label="Press to continue",wp=get_wp(),...) {
 	buttonHandler(id, wp.submit.btn.click, stage.name = stage$name, action.ids=action.ids,sm.ids=sm.ids, app = app)
 
 	try(dsetUI(ns("msg"),"", app=app),silent = TRUE)
-	as.character(
-		tagList(
+
+	ui =	tagList(
 			uiOutput(ns("msg")),
 			simpleButton(id,label, form.ids = c(wp$submit.ids, action.ids,sm.ids),...)
-		)
 	)
+
+	if (as.tag) return(ui)
+  as.character(ui)
 }
 
 
-actionField = function(name,label=NULL,choiceLabels=NULL, inputType="auto",wp=get_wp(),player=wp$human,action.name = name, ...) {
+actionField = function(name,label=NULL,choiceLabels=NULL, inputType="auto",wp=get_wp(),player=wp$human,action.name = name, as.tag=FALSE, width=NULL, ...) {
 	vg = wp$vg
 	stage = wp.stage(wp)
 	action = stage$actions[[action.name]]
@@ -137,13 +174,14 @@ actionField = function(name,label=NULL,choiceLabels=NULL, inputType="auto",wp=ge
     names(choices) = choiceLabels
   }
   if (inputType=="radio") {
-    ui = radioButtons(inputId = id,label = label,choices = choices, selected=NA)
+    ui = radioButtons(inputId = id,label = label,choices = choices, selected=NA, width=width)
   } else if (inputType=="rowRadio") {
     ui = rowRadioButtons(inputId = id,label = "",choices = choices, selected=NA)
   } else {
   	choices = c(list(""),as.list(choices))
-    ui = selectizeInput(inputId = id,label = label,choices = choices, selected=NA)
+    ui = selectizeInput(inputId = id,label = label,choices = choices, selected=NA, width=width)
   }
+  if (as.tag) return(ui)
 
   html = as.character(ui)
 	html

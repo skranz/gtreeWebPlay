@@ -59,6 +59,7 @@ examples.wpDevelApp = function() {
 set_wp_for_app = function(wp, app=getApp(), copy=TRUE) {
   if (copy) wp = wp_copy(wp)
   app$wp = wp
+  invisible(wp)
 }
 
 #' Gets the web play object of the current app instance
@@ -159,7 +160,7 @@ wp.default.finish.handler = function(wp,...) {
 wp_developer_ui = function() {
   ui = tagList(
     simpleButton("develEditPageBtn","Edit Page", class.add="btn-xs"),
-    simpleButton("develRefreshPageBtn","Refresh Page", , class.add="btn-xs"),
+    simpleButton("develRefreshPageBtn","Refresh Page",class.add="btn-xs"),
     simpleButton("develStartPlayBtn","Restart", class.add="btn-xs"),
     simpleButton("develChangePlayerBtn","Change Player", class.add="btn-xs")
   )
@@ -187,6 +188,9 @@ wp_developer_ui = function() {
   buttonHandler("develRefreshPageBtn",function(...) {
     wp = get_wp()
     if (is.null(wp)) return()
+    page.name = wp.page.name(wp)
+    if (!is.null(page.name))
+      wp$page.comp[[page.name]] = NULL
     ui = make.wp.page.ui(wp)
     dsetUI(wp$wpUI, ui)
     setUI(wp$wpUI, ui)
@@ -201,3 +205,21 @@ wp.edit.page.btn.click = function(wp=get_wp(),...) {
   page.file = wp.page.file(wp,make.auto = TRUE, copy.auto=TRUE)
   rstudioapi::navigateToFile(page.file)
 }
+
+compute.wp.page.values = function(wp, page.name = wp.page.name(wp), run.pre.page.handler = TRUE) {
+  restore.point("compute.wp.page.values")
+  play = wp$play
+  is.end = wp$stage.num >length(wp$vg$stages)
+  values = c(play$hist, list(.wp=wp, .player = wp$human, human=wp$human))
+  if (is.end)
+    values$payoffs =unlist(values[startsWith(names(play$hist), "payoff_")])
+
+
+  if (!is.null(wp$pre.page.handler) & run.pre.page.handler) {
+    extra.compute = wp$pre.page.handler(wp=wp, values=values, is.end = is.end , is.start = wp$stage.num == 0)
+    values[names(extra.compute)] = extra.compute
+  }
+	wp$page.values = values
+  invisible(wp)
+}
+

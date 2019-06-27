@@ -4,12 +4,12 @@ Player 1 checked and you too.
 #< if (cb1=="check" & cb2=="bet" & fc1=="fold")
 Player 1 checked and you bet an additional dollar.
 
-<b>Player 1 folds.</b>
+Player 1 then folds.
 #>
-#< if (cb1=="check" & cb2=="bet" & cb1=="call")
+#< if (cb1=="check" & cb2=="bet" & fc1=="call")
 Player 1 checked and you have bet an additional dollar.
 
-<b>Player 1 call.</b>
+Player 1 then calls.
 #>
 #< if (cb1=="bet" & fc2=="fold")
 Player 1 bet one additional dollar and you have folded.

@@ -1,7 +1,6 @@
 library(gtreeWebPlay)
+disable.restore.points(TRUE) # To speed up everything
 
-# Set to directory of this app
-setwd(system.file("examples/KuhnPoker", package="gtreeWebPlay"))
 
 # The file game_create.R creates and solves the game
 # For speed purposes, we just load the solved game.
@@ -9,10 +8,10 @@ game = readRDS("game.Rds")
 
 # pps (population play summary) describes how the previous
 # web app users have played so far
-if (!file.exists("pps.Rds")) {
+if (!file.exists("data/pps.Rds")) {
   pps = new_pps(game)
 } else {
-  pps = readRDS("pps.Rds")
+  pps = readRDS("data/pps.Rds")
 }
 
 # bot_pop samples from the play of previous app users
@@ -37,7 +36,7 @@ pre.page.handler = function(values, wp,is.end,human=wp$human,...) {
     names(secs) = paste0("secs_",names(secs))
 
     dat = c(list(sessionId=getApp()$sessionId, start_time=wp$start.time, end_time=Sys.time(), rounds=wp$custom$round, total_win=wp$custom$total_win), wp$play$hist, secs) %>% as.data.frame
-    file = "plays.csv"
+    file = "data/plays.csv"
     new = !file.exists(file)
     write.table(dat,file = file, append=!new,col.names=new, row.names=FALSE, sep=",")
 
@@ -94,16 +93,21 @@ app$ui = fluidPage(
   )
 )
 
-# Check all 2 minutes whether pps has been changed
+# Check every minute whether pps has been changed
 # and save it if that is the case
-timerHandler("save_pps_handler",1000*60*2, function(...) {
+timerHandler("save_pps_handler",1000*60*1, function(app=getApp(),...) {
   # Call all 2 minutes seconds
   cat("\nCalled save_pps_handler")
+  restore.point("jdoidfjoidjf")
   if (isTRUE(app$glob$pps.changed)) {
+    #restore.point("dlfjdlfj")
     cat("\npps saved!")
     app$glob$pps.changed = FALSE
-    saveRDS(get_wp()$pps,"pps.Rds")
+    pps = get_wp()$pps
+    if (!is.null(pps))
+      saveRDS(pps,"data/pps.Rds")
   }
+  cat("\nEnd save_pps_handler")
 })
 
 # The function in appInitHandler will be called when a new app

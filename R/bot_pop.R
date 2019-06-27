@@ -21,10 +21,10 @@
 #' @family Bots
 #' @family population play functions
 bot_pop = function(game, player, pps, alt.bot = NULL, alt.bot.count = 5, name="pop_bot", alt.bot.fun = bot_random,...) {
+  restore.point("bot_pop")
   if (is.null(alt.bot)) {
     alt.bot = alt.bot.fun(game=game, player=player,...)
   }
-  restore.point("bot_pop")
   bot = list(
     name = name,
     player = player,
@@ -129,7 +129,7 @@ pps_add_play_actions = function(pps,play, stage.num = play$human.stage.finished)
       df = bind_rows(df, as_tibble(c(val.li, list(.count=1L))))
       pps[[stage$name]] = df
     } else {
-      row = multi.key.match(val.li, df, keys=key.vars)
+      row = multi.key.match(val.li, df, keys=c(key.vars, action.vars))
       if (!is.na(row)) {
         pps[[stage$name]][[".count"]][row] = pps[[stage$name]][[".count"]][row]+1L
       } else {

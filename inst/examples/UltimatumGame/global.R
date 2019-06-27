@@ -4,6 +4,7 @@
 # setwd()
 
 library(gtreeWebPlay)
+disable.restore.points(TRUE) # To speed up everything
 
 # Specify UltimatumGame
 game = new_game(

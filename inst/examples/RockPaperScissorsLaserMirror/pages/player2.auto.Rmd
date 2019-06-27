@@ -1,0 +1,7 @@
+<h3>player2</h3>
+<h4>Player: {{.player}}</h4>
+
+
+{{actionField(name="a2", label="a2:", choiceLabels = NULL)}}
+
+{{submitPageBtn("Press to proceed")}}

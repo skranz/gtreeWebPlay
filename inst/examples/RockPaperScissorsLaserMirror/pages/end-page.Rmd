@@ -1,0 +1,23 @@
+<h4>You finished a round of Rock-Paper-Scissors-Laser-Mirror</h4>
+
+You picked <b>{{labels[a[human]]}}</b>.
+
+The other player <b>{{labels[a[3-human]]}}</b>.
+
+#< if payoffs[human] == 1
+You won! (+1 point)
+#>
+#< if payoffs[human] == 0
+We have a draw.
+#>
+#< if payoffs[human] < 0
+You lost! (-1 point)
+#>
+
+Rounds so far: {{.wp$rounds}}
+
+Total points: {{.wp$total_payoff}}
+</p>
+
+<br>
+{{submitEndPageBtn("Press to restart")}}

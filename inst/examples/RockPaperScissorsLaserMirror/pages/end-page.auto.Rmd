@@ -1,0 +1,14 @@
+<h3>You finished a round of RockPaperScissorsLaserMirror</h3>
+
+
+<h3>Realized outcome</h3>
+<p>
+a1: {{a1}}<br>
+a2: {{a2}}<br>
+pi1: {{pi1}}<br>
+payoff_1: {{payoff_1}}<br>
+payoff_2: {{payoff_2}}
+</p>
+
+<br>
+{{submitEndPageBtn("Press to restart")}}
