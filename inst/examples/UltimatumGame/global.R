@@ -47,10 +47,11 @@ game %>%
 # You need to have Gambit installed
 # and set gambit dir to the locaction of its command line
 # tools (or specify Gambit on the system PATH).
-game %>%
-  game_set_preferences(pref_ineqAv(alpha=1, beta=0.3)) %>%
-  game_gambit_solve(qre.lambda=0.8, gambit.dir="", verbose=TRUE) %>%
-  eq_tables()
+
+#game %>%
+#  game_set_preferences(pref_ineqAv(alpha=1, beta=0.3)) %>%
+#  game_gambit_solve(qre.lambda=0.8, gambit.dir="", verbose=TRUE) %>%
+#  eq_tables()
 
 # Bots that follow equilibrium play
 # You can also use other bots like bot_random, bot_pop etc.
