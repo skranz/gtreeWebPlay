@@ -145,7 +145,7 @@ submitPageBtn = function(label="Press to continue",wp=get_wp(),as.tag=FALSE,...)
 }
 
 
-actionField = function(name,label=NULL,choiceLabels=NULL, inputType="auto",wp=get_wp(),player=wp$human,action.name = name, as.tag=FALSE, width=NULL, ...) {
+actionField = function(name,label=NULL,choiceLabels=NULL, inputType=c("auto","radio","rowRadio", "selectize", "slider")[1],wp=get_wp(),player=wp$human,action.name = name, as.tag=FALSE, width=NULL, ...) {
 	vg = wp$vg
 	stage = wp.stage(wp)
 	action = stage$actions[[action.name]]
@@ -177,6 +177,16 @@ actionField = function(name,label=NULL,choiceLabels=NULL, inputType="auto",wp=ge
     ui = radioButtons(inputId = id,label = label,choices = choices, selected=NA, width=width)
   } else if (inputType=="rowRadio") {
     ui = rowRadioButtons(inputId = id,label = "",choices = choices, selected=NA)
+  } else if (inputType=="slider") {
+    as.tag = TRUE
+    vals = unlist(choices)
+    if (!is.numeric(vals))
+      stop("Slider needs numeric action space.")
+    step = unique(diff(vals))
+    if (length(step)>1)
+      stop("Slider requires that numeric choices increase in constant steps.")
+    ui = sliderInput(inputId=id,label = label,min=min(vals), max=max(vals),step = step, round=FALSE, width=width, ...)
+
   } else {
   	choices = c(list(""),as.list(choices))
     ui = selectizeInput(inputId = id,label = label,choices = choices, selected=NA, width=width)
